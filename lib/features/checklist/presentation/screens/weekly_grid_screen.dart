@@ -7,15 +7,18 @@ import 'package:jup_weekly/features/checklist/presentation/widgets/empty_tasks_w
 import 'package:provider/provider.dart';
 
 class WeeklyGridScreen extends StatelessWidget {
-  const WeeklyGridScreen({super.key});
+  final bool showAppBar;
+  const WeeklyGridScreen({super.key, this.showAppBar = true});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Weekly Grid'),
-        centerTitle: false,
-      ),
+      appBar: showAppBar
+          ? AppBar(
+              title: const Text('Weekly Grid'),
+              centerTitle: false,
+            )
+          : null,
       body: Consumer<ChecklistProvider>(
         builder: (context, provider, child) {
           if (provider.isLoading || provider.week == null) {
@@ -23,9 +26,7 @@ class WeeklyGridScreen extends StatelessWidget {
           }
 
           final week = provider.week!;
-          final allTasks =
-              week.days.expand((day) => day.tasks).toList();
-          
+          final allTasks = week.days.expand((day) => day.tasks).toList();
           final uniqueTasks = <String, TaskEntity>{};
           for (var task in allTasks) {
             uniqueTasks.putIfAbsent(task.title, () => task);
@@ -38,7 +39,7 @@ class WeeklyGridScreen extends StatelessWidget {
           }
 
           return SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

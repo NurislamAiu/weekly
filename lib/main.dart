@@ -12,7 +12,7 @@ import 'package:jup_weekly/features/checklist/domain/usecases/reorder_task_useca
 import 'package:jup_weekly/features/checklist/domain/usecases/reset_week_usecase.dart';
 import 'package:jup_weekly/features/checklist/domain/usecases/toggle_task_usecase.dart';
 import 'package:jup_weekly/features/checklist/presentation/providers/checklist_provider.dart';
-import 'package:jup_weekly/features/checklist/presentation/screens/week_screen.dart';
+import 'package:jup_weekly/features/checklist/presentation/screens/dashboard_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -45,7 +45,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Weekly Checklist',
         theme: AppTheme.theme,
-        home: const WeekScreen(),
+        home: const DashboardScreen(),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
